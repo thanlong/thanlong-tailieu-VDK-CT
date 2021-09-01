@@ -1,0 +1,16 @@
+[PROJECT]
+Target=HIEN THI LED DON.hex
+Processor_Text=PIC16F877A
+CCSVersion=5.015
+Compiler=PCM
+[Target Data]
+FileList=HIEN THI LED DON.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[HIEN THI LED DON.c]
+Type=4
+[mru-list]
+1=HIEN THI LED DON.c
+[Units]
+Count=1
+1=HIEN THI LED DON (main)

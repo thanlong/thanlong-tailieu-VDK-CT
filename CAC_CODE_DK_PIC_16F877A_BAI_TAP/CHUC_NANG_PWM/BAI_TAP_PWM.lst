@@ -1,0 +1,133 @@
+CCS PCM C Compiler, Version 5.015, 5967               01-Thg9-21 19:07
+
+               Filename:   F:\TAILIEU\VDK\BAI_TAP_CHUC_NANG_PWM\BAI_TAP_PWM.lst
+
+               ROM used:   80 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   7 (2%) at main() level
+                           8 (2%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   01B
+0003:  NOP
+.................... //CN PWN 
+.................... //DK DEN LED SANG 60% SAU 10S SANG 90% 
+.................... #include <16f877a.h> 
+.................... //////////// Standard Header file for the PIC16F877A device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877A 
+....................  
+.................... #list 
+....................  
+.................... #fuses hs 
+.................... #use delay(clock=4M) 
+0004:  MOVLW  22
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  BCF    0A.3
+0019:  BCF    0A.4
+001A:  GOTO   043 (RETURN)
+....................  
+.................... void main() 
+001B:  MOVF   03,W
+001C:  ANDLW  1F
+001D:  MOVWF  03
+001E:  MOVLW  FF
+001F:  MOVWF  20
+0020:  BSF    03.5
+0021:  BSF    1F.0
+0022:  BSF    1F.1
+0023:  BSF    1F.2
+0024:  BCF    1F.3
+0025:  MOVLW  07
+0026:  MOVWF  1C
+0027:  BCF    03.7
+.................... { 
+.................... set_tris_c(0x00); 
+0028:  MOVLW  00
+0029:  MOVWF  07
+002A:  BCF    03.5
+002B:  MOVWF  20
+.................... setup_ccp1(CCP_PWM); // Bat che do PWM cho RC1  
+002C:  BCF    20.2
+002D:  MOVF   20,W
+002E:  BSF    03.5
+002F:  MOVWF  07
+0030:  BCF    03.5
+0031:  BCF    07.2
+0032:  MOVLW  0C
+0033:  MOVWF  17
+.................... setup_ccp2(CCP_PWM); // Bat che do PWM cho RC2  
+0034:  BCF    20.1
+0035:  MOVF   20,W
+0036:  BSF    03.5
+0037:  MOVWF  07
+0038:  BCF    03.5
+0039:  BCF    07.1
+003A:  MOVLW  0C
+003B:  MOVWF  1D
+....................  
+.................... //DO SANG BANG SO PHAN TRAM X2.5 
+....................  
+.................... set_pwm2_duty(150);//60% 
+003C:  MOVLW  96
+003D:  MOVWF  1B
+.................... delay_ms(10000); 
+003E:  MOVLW  28
+003F:  MOVWF  21
+0040:  MOVLW  FA
+0041:  MOVWF  22
+0042:  GOTO   004
+0043:  DECFSZ 21,F
+0044:  GOTO   040
+.................... set_pwm2_duty(225);//90% 
+0045:  MOVLW  E1
+0046:  MOVWF  1B
+.................... setup_timer_2(T2_DIV_BY_4,249,1);//Ta co PR2-249 prescale=4    
+0047:  MOVLW  00
+0048:  MOVWF  78
+0049:  IORLW  05
+004A:  MOVWF  12
+004B:  MOVLW  F9
+004C:  BSF    03.5
+004D:  MOVWF  12
+....................  
+.................... while(1) 
+....................  { 
+004E:  GOTO   04E
+....................  } 
+....................  
+.................... } 
+004F:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F72   HS NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

@@ -1,0 +1,123 @@
+CCS PCM C Compiler, Version 5.015, 5967               10-Mar-21 17:12
+
+               Filename:   D:\VIDU TH VDK\DK LED DON SANG DAN\MAIN.lst
+
+               ROM used:   77 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   6 (2%) at main() level
+                           7 (2%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   019
+0003:  NOP
+.................... #include<16f877a.h> 
+.................... //////////// Standard Header file for the PIC16F877A device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877A 
+....................  
+.................... #list 
+....................  
+.................... #fuses hs 
+.................... #use delay(clock=4M) 
+0004:  MOVLW  22
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+.................... #byte portb=0x06 
+.................... void main() 
+0019:  MOVF   03,W
+001A:  ANDLW  1F
+001B:  MOVWF  03
+001C:  BSF    03.5
+001D:  BSF    1F.0
+001E:  BSF    1F.1
+001F:  BSF    1F.2
+0020:  BCF    1F.3
+0021:  MOVLW  07
+0022:  MOVWF  1C
+0023:  BCF    03.7
+.................... { 
+....................    set_tris_b(0); 
+0024:  MOVLW  00
+0025:  MOVWF  06
+....................    portb=0b0000; 
+0026:  BCF    03.5
+0027:  CLRF   06
+....................    delay_ms(1000); 
+0028:  MOVLW  04
+0029:  MOVWF  21
+002A:  MOVLW  FA
+002B:  MOVWF  22
+002C:  CALL   004
+002D:  DECFSZ 21,F
+002E:  GOTO   02A
+....................    portb=0b0001; 
+002F:  MOVLW  01
+0030:  MOVWF  06
+....................    delay_ms(1000); 
+0031:  MOVLW  04
+0032:  MOVWF  21
+0033:  MOVLW  FA
+0034:  MOVWF  22
+0035:  CALL   004
+0036:  DECFSZ 21,F
+0037:  GOTO   033
+....................    portb=0b0011; 
+0038:  MOVLW  03
+0039:  MOVWF  06
+....................    delay_ms(1000); 
+003A:  MOVLW  04
+003B:  MOVWF  21
+003C:  MOVLW  FA
+003D:  MOVWF  22
+003E:  CALL   004
+003F:  DECFSZ 21,F
+0040:  GOTO   03C
+....................    portb=0b0111; 
+0041:  MOVLW  07
+0042:  MOVWF  06
+....................    delay_ms(1000); 
+0043:  MOVLW  04
+0044:  MOVWF  21
+0045:  MOVLW  FA
+0046:  MOVWF  22
+0047:  CALL   004
+0048:  DECFSZ 21,F
+0049:  GOTO   045
+....................    portb=0b1111; 
+004A:  MOVLW  0F
+004B:  MOVWF  06
+.................... } 
+004C:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F72   HS NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

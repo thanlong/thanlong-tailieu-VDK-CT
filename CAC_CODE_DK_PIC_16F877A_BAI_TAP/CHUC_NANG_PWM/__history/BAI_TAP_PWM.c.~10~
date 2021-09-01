@@ -1,0 +1,16 @@
+#include <16f877a.h>
+#fuses hs
+#use delay(clock=4000000)
+
+void main()
+{
+set_tris_c(0x00);
+setup_ccp1(CCP_PWM); // Bat che do PWM cho RC1 
+setup_timer_1(T1_DIV_BY_4,249,1);//Ta co PR2-249 prescale=
+while (1)
+   {
+      set_pwm1_duty(150);//60%
+      delay_ms(10000);
+      set_pwm1_duty(225);//90%
+   }
+}
