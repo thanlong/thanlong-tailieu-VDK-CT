@@ -1,0 +1,24 @@
+//LAP TRINH CHO VI DIEU KHIEN PIC
+//DIEU KHIEN 4 LED SANG DAN
+
+#include<16f877a.h>
+#fuses hs
+#use delay(clock=4M)
+#byte portb=0x06
+void main()
+{
+   set_tris_b(0);//Thuc hien 1 lan
+   while(true) //vong lap vo tan
+   {  
+      portb=0b0000;
+      delay_ms(100);
+      portb=0b0001;
+      delay_ms(100);
+      portb=0b0011;
+      delay_ms(100);
+      portb=0b0111;
+      delay_ms(100);
+      portb=0b1111;
+      delay_ms(100);
+   }  
+}

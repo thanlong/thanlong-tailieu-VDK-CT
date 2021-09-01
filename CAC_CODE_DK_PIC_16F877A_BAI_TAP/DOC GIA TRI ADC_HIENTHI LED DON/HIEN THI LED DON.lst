@@ -1,0 +1,128 @@
+CCS PCM C Compiler, Version 5.015, 5967               12-Apr-21 14:45
+
+               Filename:   D:\VIDU TH VDK\DOC GIA TRI ADC_HIENTHI LED DON\HIEN THI LED DON.lst
+
+               ROM used:   78 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   7 (2%) at main() level
+                           8 (2%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   01B
+0003:  NOP
+.................... #include <16f877a.h> 
+.................... //////////// Standard Header file for the PIC16F877A device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877A 
+....................  
+.................... #list 
+....................  
+.................... #device adc=8 
+.................... #fuses hs 
+.................... #use delay(clock=4000000) 
+0004:  MOVLW  22
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  BCF    0A.3
+0019:  BCF    0A.4
+001A:  GOTO   045 (RETURN)
+.................... #byte portc=0x07//GAN 8 LED DON 
+.................... int value;//LUU GIA TRI ADC 
+.................... void  main( ) 
+001B:  MOVF   03,W
+001C:  ANDLW  1F
+001D:  MOVWF  03
+001E:  MOVLW  FF
+001F:  MOVWF  21
+0020:  BSF    03.5
+0021:  BSF    1F.0
+0022:  BSF    1F.1
+0023:  BSF    1F.2
+0024:  BCF    1F.3
+0025:  MOVLW  07
+0026:  MOVWF  1C
+0027:  BCF    03.7
+.................... {  
+....................    set_tris_a(1); 
+0028:  MOVLW  01
+0029:  MOVWF  05
+....................    set_tris_c(0); 
+002A:  MOVLW  00
+002B:  MOVWF  07
+002C:  BCF    03.5
+002D:  MOVWF  21
+....................    setup_ADC(ADC_clock_internal); 
+002E:  BSF    03.5
+002F:  BCF    1F.6
+0030:  BCF    03.5
+0031:  BSF    1F.6
+0032:  BSF    1F.7
+0033:  BSF    03.5
+0034:  BCF    1F.7
+0035:  BCF    03.5
+0036:  BSF    1F.0
+....................    setup_ADC_ports(AN0); 
+0037:  BSF    03.5
+0038:  BCF    1F.0
+0039:  BSF    1F.1
+003A:  BSF    1F.2
+003B:  BSF    1F.3
+....................    set_ADC_channel(0); 
+003C:  MOVWF  78
+003D:  BCF    03.5
+003E:  MOVF   1F,W
+003F:  ANDLW  C7
+0040:  IORWF  78,W
+0041:  MOVWF  1F
+....................    delay_ms(10); 
+0042:  MOVLW  0A
+0043:  MOVWF  22
+0044:  GOTO   004
+....................    while(1) 
+....................    { 
+....................       value=read_adc(); 
+0045:  BSF    1F.2
+0046:  BTFSC  1F.2
+0047:  GOTO   046
+0048:  MOVF   1E,W
+0049:  MOVWF  20
+....................       portc=value; 
+004A:  MOVF   20,W
+004B:  MOVWF  07
+004C:  GOTO   045
+....................    } 
+.................... } 
+....................  
+004D:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F72   HS NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

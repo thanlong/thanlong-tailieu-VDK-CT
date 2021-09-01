@@ -1,0 +1,8 @@
+#include<16f877a.h>
+#fuses hs
+#use delay(clock=4M)
+
+void main()
+{
+   
+}

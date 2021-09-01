@@ -1,0 +1,8 @@
+#include<16f877a.h>
+#fuses hs
+#use delay(clock=4M)
+#byte portb=0x06
+void main()
+{
+   set_tris_b(0);
+}

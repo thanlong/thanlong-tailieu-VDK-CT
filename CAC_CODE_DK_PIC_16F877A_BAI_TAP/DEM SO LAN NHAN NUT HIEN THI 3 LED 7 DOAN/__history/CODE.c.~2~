@@ -1,0 +1,17 @@
+//MO PHONG CO 4 CON LED 7 DOAN CHI QUAN TAM 2 CON CUOI CUNG
+//VI TRI LED CHUC VA DON VI CO THE DOI CHO NHAU
+
+
+#include <16f877a.h>
+#fuses hs
+#use delay(clock=4000000)
+#byte portd=0x08
+#bit ra1=0x05.1
+#bit ra2=0x05.2
+#bit ra3=0x05.3
+
+
+void main()
+{ 
+   
+}     

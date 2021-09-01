@@ -1,0 +1,23 @@
+[PROJECT]
+Target=CODE.hex
+Processor_Text=PIC16F877A
+CCSVersion=5.015
+Compiler=PCM
+[Target Data]
+FileList=CODE.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[CODE.c]
+Type=4
+[mru-list]
+1=CODE.c
+[Opened Files]
+1=..\DK 3 LED 7 DOAN TU 0 DEN 256\CODE.c
+2=..\DK 2 LED 7 DOAN TU 00 DEN 99\CODE.c
+3=CODE.c
+4=..\DOC GIA TRI ADC_HIENTHI LED DON\HIEN THI LED DON.c
+5=..\..\..\..\OneDrive\Máy tính\hienthi_lcd_vothanhnhan_cdddt19e\lcd.c
+6=
+[Units]
+Count=1
+1=CODE (main)

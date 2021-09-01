@@ -1,0 +1,36 @@
+#include <16f877a.h>
+#fuses hs
+#use delay(clock=4000000)
+#byte portd=0x08
+#bit ra0=0x05.0
+#bit ra1=0x05.1
+
+
+int8 maled7[11]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90,0xff};
+int sodem,chuc,donvi,tam;
+void main()
+{ 
+   set_tris_a(0x00);
+   set_tris_D(0x00);   
+   while(1)
+   {  
+      For (sodem=00;sodem<99;sodem++)
+      {
+         chuc=sodem/10;
+         donvi=sodem%10;
+         For (tam=1;tam<=100;tam++)
+         {
+            PORTD=0XFF; //DANH CHO MO PHONG
+            RA0=0;
+            RA1=1;
+            portd=maled7[chuc];
+            delay_ms(5);
+            PORTD=0XFF; //DANH CHO MO PHONG
+            RA0=1;
+            RA1=0;
+            portd=maled7[donvi];
+            delay_ms(5);
+         }
+      }    
+   }
+}     

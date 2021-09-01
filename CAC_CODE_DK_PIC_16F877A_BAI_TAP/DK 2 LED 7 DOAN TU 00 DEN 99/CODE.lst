@@ -1,0 +1,207 @@
+CCS PCM C Compiler, Version 5.015, 5967               24-Mar-21 20:02
+
+               Filename:   D:\VIDU TH VDK\DK 2 LED 7 DOAN TU 00 DEN 99\CODE.lst
+
+               ROM used:   139 words (2%)
+                           Largest free fragment is 2048
+               RAM used:   19 (5%) at main() level
+                           22 (6%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   02E
+0003:  NOP
+.................... //MO PHONG CO 4 CON LED 7 DOAN CHI QUAN TAM 2 CON CUOI CUNG 
+.................... //VI TRI LED CHUC VA DON VI CO THE DOI CHO NHAU 
+....................  
+....................  
+.................... #include <16f877a.h> 
+.................... //////////// Standard Header file for the PIC16F877A device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877A 
+0004:  MOVF   2F,W
+0005:  CLRF   78
+0006:  SUBWF  2E,W
+0007:  BTFSC  03.0
+0008:  GOTO   00C
+0009:  MOVF   2E,W
+000A:  MOVWF  77
+000B:  GOTO   018
+000C:  CLRF   77
+000D:  MOVLW  08
+000E:  MOVWF  30
+000F:  RLF    2E,F
+0010:  RLF    77,F
+0011:  MOVF   2F,W
+0012:  SUBWF  77,W
+0013:  BTFSC  03.0
+0014:  MOVWF  77
+0015:  RLF    78,F
+0016:  DECFSZ 30,F
+0017:  GOTO   00F
+0018:  RETURN
+....................  
+.................... #list 
+....................  
+.................... #fuses hs 
+.................... #use delay(clock=4000000) 
+0019:  MOVLW  2E
+001A:  MOVWF  04
+001B:  BCF    03.7
+001C:  MOVF   00,W
+001D:  BTFSC  03.2
+001E:  GOTO   02D
+001F:  MOVLW  01
+0020:  MOVWF  78
+0021:  CLRF   77
+0022:  DECFSZ 77,F
+0023:  GOTO   022
+0024:  DECFSZ 78,F
+0025:  GOTO   021
+0026:  MOVLW  4A
+0027:  MOVWF  77
+0028:  DECFSZ 77,F
+0029:  GOTO   028
+002A:  GOTO   02B
+002B:  DECFSZ 00,F
+002C:  GOTO   01F
+002D:  RETURN
+.................... #byte portd=0x08 
+.................... #bit ra0=0x05.0 
+.................... #bit ra1=0x05.1 
+....................  
+.................... int8 maled7[10]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90}; 
+*
+0039:  MOVLW  C0
+003A:  BCF    03.5
+003B:  MOVWF  20
+003C:  MOVLW  F9
+003D:  MOVWF  21
+003E:  MOVLW  A4
+003F:  MOVWF  22
+0040:  MOVLW  B0
+0041:  MOVWF  23
+0042:  MOVLW  99
+0043:  MOVWF  24
+0044:  MOVLW  92
+0045:  MOVWF  25
+0046:  MOVLW  82
+0047:  MOVWF  26
+0048:  MOVLW  F8
+0049:  MOVWF  27
+004A:  MOVLW  80
+004B:  MOVWF  28
+004C:  MOVLW  90
+004D:  MOVWF  29
+.................... int dem,chuc,donvi,i; 
+.................... void main() 
+*
+002E:  MOVF   03,W
+002F:  ANDLW  1F
+0030:  MOVWF  03
+0031:  BSF    03.5
+0032:  BSF    1F.0
+0033:  BSF    1F.1
+0034:  BSF    1F.2
+0035:  BCF    1F.3
+0036:  MOVLW  07
+0037:  MOVWF  1C
+0038:  BCF    03.7
+.................... {  
+....................    set_tris_a(0x00); 
+*
+004E:  MOVLW  00
+004F:  BSF    03.5
+0050:  MOVWF  05
+....................    set_tris_D(0x00);      
+0051:  MOVWF  08
+....................    For (dem=00;dem<99;dem++) 
+0052:  BCF    03.5
+0053:  CLRF   2A
+0054:  MOVF   2A,W
+0055:  SUBLW  62
+0056:  BTFSS  03.0
+0057:  GOTO   08A
+....................    { 
+....................          chuc=dem/10; 
+0058:  MOVF   2A,W
+0059:  MOVWF  2E
+005A:  MOVLW  0A
+005B:  MOVWF  2F
+005C:  CALL   004
+005D:  MOVF   78,W
+005E:  MOVWF  2B
+....................          donvi=dem%10; 
+005F:  MOVF   2A,W
+0060:  MOVWF  2E
+0061:  MOVLW  0A
+0062:  MOVWF  2F
+0063:  CALL   004
+0064:  MOVF   77,W
+0065:  MOVWF  2C
+....................          For (i=1;i<=100;i++) 
+0066:  MOVLW  01
+0067:  MOVWF  2D
+0068:  MOVF   2D,W
+0069:  SUBLW  64
+006A:  BTFSS  03.0
+006B:  GOTO   088
+....................          { 
+....................             PORTD=0XFF; //DANH CHO MO PHONG 
+006C:  MOVLW  FF
+006D:  MOVWF  08
+....................             RA0=1; 
+006E:  BSF    05.0
+....................             RA1=0; 
+006F:  BCF    05.1
+....................             portd=maled7[chuc]; 
+0070:  MOVLW  20
+0071:  ADDWF  2B,W
+0072:  MOVWF  04
+0073:  BCF    03.7
+0074:  MOVF   00,W
+0075:  MOVWF  08
+....................             delay_ms(5); 
+0076:  MOVLW  05
+0077:  MOVWF  2E
+0078:  CALL   019
+....................             PORTD=0XFF; //DANH CHO MO PHONG 
+0079:  MOVLW  FF
+007A:  MOVWF  08
+....................             RA0=0; 
+007B:  BCF    05.0
+....................             RA1=1; 
+007C:  BSF    05.1
+....................             portd=maled7[donvi]; 
+007D:  MOVLW  20
+007E:  ADDWF  2C,W
+007F:  MOVWF  04
+0080:  BCF    03.7
+0081:  MOVF   00,W
+0082:  MOVWF  08
+....................             delay_ms(5); 
+0083:  MOVLW  05
+0084:  MOVWF  2E
+0085:  CALL   019
+0086:  INCF   2D,F
+0087:  GOTO   068
+....................          } 
+0088:  INCF   2A,F
+0089:  GOTO   054
+....................     }     
+.................... }      
+008A:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F72   HS NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT
